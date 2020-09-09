@@ -1,0 +1,12 @@
+{% extends 'quiz/base.html' %}
+{% block content %}
+{% for quiz in quizes %}
+    <div>
+    {% if user.user_type == 'ST' %}
+    <p><a href = {% url 'attempt-quiz' quiz.quiz_id %}>Attempt the {{quiz.quizdescription}} for class {{quiz.class_number}}</a><p>    <!--Link to quiz attempt page for current quiz-->
+    {% else %}
+     <p><a href = "#">View Results of {{quiz.quizdescription}} for class {{quiz.class_number}}</a><p> <!--Link to quiz results page for current quiz-->
+    {% endif %}
+    </div>
+{% endfor %}
+{% endblock content %}

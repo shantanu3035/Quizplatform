@@ -1,0 +1,29 @@
+{% extends "quiz/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class ="content">
+        <form method ="POST">   <!--Forms need csrf tokens-->
+            {% csrf_token %}
+            {{formset.management_form}}
+            {{cformset.management_form}}
+            {% for form in formset %}
+                <div class ="row form-row spacer">
+                    <div class='col-4'>
+                        <fieldset class="form-group">
+                            {{form|crispy}} <!--Use filter to use crispy-->
+                                {% for cform in cformset  %}
+                                    {{cform|crispy}}
+                                {% endfor %}
+                         <fieldset> 
+                        <div class="input-group-append">
+                            <!--<button class="btn btn-success add-form-row">+</button>-->
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Add Question</button>
+        </div>
+        </form>
+    </div>
+{% endblock content %}

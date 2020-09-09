@@ -1,0 +1,80 @@
+<!---Here you specify all the front end information for the home page-->
+<!--Logic in single braces, and variables in double braces-->
+    <!-- FOR, END FOR, IF, ELSEIF, ENDIF -->
+
+<!-- Replace this with a front end framework like React.js-->
+
+{% load static %}   <!-- Loads the static file from the directory -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'quiz/main.css' %}">
+
+    {% if title %}
+        <title>{{ title }} Quiz Portal</title>
+    {% else %}
+        <title>School Quiz Portal</title>
+    {% endif %}
+</head>
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href={% url 'home' %}>Quiz Portal</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a></a><!--Add Common Links here-->
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">    <!-- Takes care of login/logout display, using inbuilt method-->
+              {% if user.is_authenticated%}
+                {% if user.user_type == 'ST'%}
+                <a class="nav-item nav-link" href= {% url 'profile' %}>Profile</a>
+                {% endif %}
+                {% if user.user_type == 'TE' %}
+                <a class="nav-item nav-link" href= {% url 'create-question' %}>Create Questions</a>
+                <a class="nav-item nav-link" href= {% url 'create-quiz' %}>Create Quiz</a>
+                {% endif %}
+                <a class="nav-item nav-link" href= {% url 'quizes' %}>View Quiz</a>
+                <a class="nav-item nav-link" href= {% url 'logout' %}>Logout</a>
+              {% else %}
+                <a class="nav-item nav-link" href= {% url 'login' %}>Login</a>
+                <a class="nav-item nav-link" href={% url 'register' %}>Register</a>
+              {% endif  %}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+              {{message}}
+            </div>
+          {% endfor %}
+        {% endif%}
+          {% block content %}
+          {% endblock %}
+        </div>
+      </div>
+    </main>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

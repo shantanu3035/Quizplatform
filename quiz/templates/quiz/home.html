@@ -1,0 +1,22 @@
+<!---Here you specify all the front end information for the home page-->
+<!--Logic in single braces, and variables in double braces-->
+    <!-- FOR, END FOR, IF, ELSEIF, ENDIF -->
+<!-- These templates can be extended using extends-->
+<!-- Replace this with a front end framework like React.js-->
+
+{% extends "quiz/base.html" %}
+{% block content %}
+{% if user.user_type == 'TE' %}
+<p>This quiz portal allows you to create questions which can be used in quizes</p>
+<p>To create questions -> click on the create question button</p>
+<p>Once the questions are created, you can go to the create quiz option to create a quiz</p>
+{% endif %}
+{% if questions %}
+<h3>Question Bank</h3></br>
+{% for q in questions %}
+    <div>
+        <p>{{q.question_text}} : {{q.correct_answer_text}}</p>
+    <div>
+{% endfor %}
+{% endif %}
+{% endblock content %}

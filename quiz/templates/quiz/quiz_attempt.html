@@ -1,0 +1,67 @@
+{% extends "quiz/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class ="content">
+    {{answerformset.management_form}}
+        {% for question in questions%}
+        <p>{{forloop.counter}}.{{question.question.question_text}}</p>
+        <p>{{question.question.id}}</p>
+        <form method ="POST">   <!--Forms need csrf tokens-->
+            {% csrf_token %}
+                <div class ="row form-row spacer">
+                    <div class='col-4'>
+                        <fieldset class="form-group">
+                            {% if question.question.id == 1 %}
+                            {% for value in answerforms.1.fields.choices.choices %}
+                                <p>{{value}}</p>
+                            {% endfor %}
+                            {% elif question.question.id == 2 %}
+                            {% for value in answerforms.2.fields.choices.choices %}
+                                <p>{{value}}</p>
+                            {% endfor %}
+                            {% elif question.question.id == 3 %}
+                            {% for value in answerforms.3.fields.choices.choices %}
+                                <p>{{value}}</p>
+                            {% endfor %}
+                            {% elif question.question.id == 4 %}
+                            {% for value in answerforms.4.fields.choices.choices %}
+                                <p>{{value}}</p>
+                            {% endfor %}
+                            {% elif question.question.id == 5 %}
+                            {% for value in answerforms.5.fields.choices.choices %}
+                                <p>{{value}}</p>
+                            {% endfor %}
+                            {% elif question.question.id == 6 %}
+                            {% for value in answerforms.6.fields.choices.choices %}
+                                <p>{{value}}</p>
+                            {% endfor %}
+                            {% elif question.question.id == 7 %}
+                            {% for value in answerforms.7.fields.choices.choices %}
+                                <p>{{value}}</p>
+                            {% endfor %}
+                            {% elif question.question.id == 8 %}
+                            {% for value in answerforms.8.fields.choices.choices %}
+                                <p>{{value}}</p>
+                            {% endfor %}
+                            {% elif question.question.id == 9 %}
+                            {% for value in answerforms.9.fields.choices.choices %}
+                                <p>{{value}}</p>
+                            {% endfor %}
+                            {% elif question.question.id == 10 %}
+                            {% for value in answerforms.10.fields.choices.choices %}
+                                <p>{{value}}</p>
+                            {% endfor %}
+                            {% endif %}
+                         <fieldset> 
+                        <div class="input-group-append">
+                            <!--<button class="btn btn-success add-form-row">+</button>-->
+                        </div>
+                    </div>
+                </div>
+    {% endfor %}
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Submit Answers</button>
+        </div>
+        </form>
+    </div>
+{% endblock content %}

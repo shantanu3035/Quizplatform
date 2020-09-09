@@ -1,0 +1,16 @@
+{% extends 'quiz/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h2>{{user.username}}</h2>
+    <p class="text-secondory">{{user.name}}</p>
+    <form method ="POST" enctype="multipart/form-data">    <!-- Enctype needed to store images-->
+            {% csrf_token %} <!--Forms need csrf tokens-->
+            <fieldset class="form-group">
+                <legend class ="border-bottom mb-4">Profile Info</legend>
+                {{p_form|crispy}} <!--Use filter to use crispy-->
+            <fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Update</button>
+        </div>
+    </form>
+{% endblock content %}
